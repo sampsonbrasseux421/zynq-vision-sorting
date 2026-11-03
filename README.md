@@ -68,6 +68,11 @@ Full register map: [`skill/pl-cmd-engine/register_map.md`](skill/pl-cmd-engine/r
 
 ---
 
+The complete Vivado project — block design, 30 IP configurations, pin
+constraints and the top-level HDMI path — is committed under
+[ivado/](vivado/README.md), so the design opens and rebuilds without any
+manual reconstruction.
+
 ## 3. Repository layout
 
 ```
@@ -81,7 +86,8 @@ Full register map: [`skill/pl-cmd-engine/register_map.md`](skill/pl-cmd-engine/r
 │       ├── deploy/   Launch scripts
 │       └── model/    Model provenance and latency
 ├── sim/          Icarus Verilog testbenches
-├── build/        Vivado TCL script and bootgen configs
+├── vivado/       Complete Vivado 2023.1 project (open the .xpr, or run scripts/rebuild.tcl)
+├── build/        Reports, bootgen configs, hardware handoff
 ├── board/        Deployment scripts for the board
 ├── data/         Runtime parameters (gripper pulse widths)
 ├── skill/        Reusable skill packages (see below)
