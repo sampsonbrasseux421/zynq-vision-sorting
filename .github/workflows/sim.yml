@@ -1,0 +1,51 @@
+name: simulation
+
+# Runs every self-checking testbench on each push, so that the claim
+# "the design is verified" can be checked by anyone without local tooling.
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  iverilog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y iverilog
+
+      - name: Show tool version
+        run: iverilog -V | head -1
+
+      - name: Run all testbenches
+        run: |
+          cd sim
+          sh run_all.sh
+          echo "--- results ---"
+          for f in results/*.log; do
+            echo "### $f"
+            tail -5 "$f"
+          done
+
+      - name: Fail if any testbench failed
+        run: |
+          cd sim
+          if grep -l '\[FAIL\]\|TIMEOUT' results/*.log; then
+            echo "::error::one or more testbenches reported a failure"
+            exit 1
+          fi
+          echo "all testbenches passed"
+
+      - name: Upload simulation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: simulation-results
+          path: sim/results/

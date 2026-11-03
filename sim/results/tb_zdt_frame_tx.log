@@ -1,0 +1,9 @@
+﻿第一帧: addr=01 dir=1 speed=3000 accel=240 pos=0 abs=1 sync=0
+  实际: 01 fd 01 0b b8 f0 00 00 00 00 01 00 6b
+  期望: 01 fd 01 0b b8 f0 00 00 00 00 01 00 6b
+
+第二帧: addr=02 speed=2500 accel=200 pos=FFFF8A3B abs=1 sync=1
+  实际: 02 fd 01 09 c4 c8 ff ff 8a 3b 01 01 6b
+  期望: 02 fd 01 09 c4 c8 ff ff 8a 3b 01 01 6b
+
+===== 全部通过 =====

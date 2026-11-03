@@ -1,0 +1,11 @@
+# Host PC dependencies
+# Python 3.10+ recommended
+numpy>=1.24
+opencv-python>=4.8
+ultralytics>=8.0          # YOLO detection
+torch>=2.1
+torchvision>=0.16
+transformers==4.49.0      # pinned: needs torch < 2.6 for the VLM
+accelerate>=0.26
+sentencepiece>=0.1.99
+Pillow>=10.0

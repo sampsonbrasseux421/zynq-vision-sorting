@@ -1,0 +1,28 @@
+﻿================ frame 1 ================
+================ frame 2 ================
+
+================ statistics check ================
+  [ ok ] red  cnt color=0 field=0 = 625
+  [ ok ] red  sx  color=0 field=1 = 92500
+  [ ok ] red  sy  color=0 field=2 = 62500
+  [ ok ] red  x0  color=0 field=3 = 100
+  [ ok ] red  x1  color=0 field=4 = 196
+  [ ok ] red  y0  color=0 field=5 = 52
+  [ ok ] red  y1  color=0 field=6 = 148
+  [ ok ] grn  cnt color=2 field=0 = 625
+  [ ok ] grn  sx  color=2 field=1 = 280000
+  [ ok ] grn  sy  color=2 field=2 = 217500
+  [ ok ] grn  x0  color=2 field=3 = 400
+  [ ok ] grn  x1  color=2 field=4 = 496
+  [ ok ] blk  cnt color=4 field=0 = 100
+  [ ok ] blk  x0  color=4 field=3 = 500
+  [ ok ] blk  x1  color=4 field=4 = 536
+  [ ok ] blue cnt color=3 field=0 = 225
+  [ ok ] blue y0  color=3 field=5 = 400
+  [ ok ] blue y1  color=3 field=6 = 456
+  [ ok ] yel  cnt color=1 field=0 = 0
+
+frame_cnt = 2 (expect 2)
+passthrough mismatches = 0
+
+===== ALL PASS (stats ok + passthrough ok) =====
