@@ -15,8 +15,9 @@ set_property IOSTANDARD TMDS_33 [get_ports {
     hdmi_data_n[*]
 }]
 
-# ---- ZDT stepper bus UART (axi_uartlite @ 0x42C00000, 115200 8N1) ----
-# FPGA TX (V18) -> driver RX ; FPGA RX (W18) -> driver TX ; GND must be common
+# ---- ZDT stepper bus UART (115200 8N1, 3.3 V TTL -- NOT RS485) ----
+# FPGA TX (K14) -> driver RX ; FPGA RX (J14) -> driver TX ; GND must be common
+# The UART itself is the PL command engine (zdt_top8), not an axi_uartlite.
 set_property PACKAGE_PIN K14 [get_ports uart_tx]
 set_property PACKAGE_PIN J14 [get_ports uart_rx]
 set_property IOSTANDARD LVCMOS33 [get_ports {uart_tx uart_rx}]
