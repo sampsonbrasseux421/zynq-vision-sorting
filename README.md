@@ -11,8 +11,8 @@ turns those registers into correctly timed UART frames.
 
 > 2026 全国大学生嵌入式芯片与系统设计竞赛 · FPGA 创新设计赛道 · 自主选题赛道
 
-<!-- replace OWNER with your GitHub user name after the first push -->
-[![simulation](https://github.com/OWNER/zynq-vision-sorting/actions/workflows/sim.yml/badge.svg)](https://github.com/OWNER/zynq-vision-sorting/actions/workflows/sim.yml)
+<!-- replace sampsonbrasseux421 with your GitHub user name after the first push -->
+[![simulation](https://github.com/sampsonbrasseux421/zynq-vision-sorting/actions/workflows/sim.yml/badge.svg)](https://github.com/sampsonbrasseux421/zynq-vision-sorting/actions/workflows/sim.yml)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
