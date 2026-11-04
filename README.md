@@ -211,3 +211,13 @@ MIT — see [LICENSE](LICENSE).
 iverilog -g2005 -o ik.vvp src/rtl/ik_solver.v sim/tb_ik_solver.v && vvp ik.vvp
 iverilog -g2005 -o itp.vvp src/rtl/zdt_interp.v sim/tb_zdt_interp.v && vvp itp.vvp
 ```
+
+## PS 端脚本与验证工具
+
+- `ps/pik.sh` —— 坐标 → 机械臂。只是写坐标、触发、读回关节角，逆解在 PL 内完成。
+  用法：`pik X Y Z` / `pik -i X Y Z 3000`（插补）/ `pik -t X Y Z`（只求解不动作）
+- `tools/final_ik_verify.py` —— 16 点上板精度验证（实测 16/16，最大偏差 0.043°）
+- `tools/extract_ik_params.py` —— 从板端未 strip 的 `ik_zdt_pl` 二进制提取真实机构参数
+- `tools/fit_ik_params.py` —— 用样本反推机构参数（结论：二连杆模型套不上整机，以 `/etc/ik.conf` 为准）
+
+细节见 `ps/README.md`。
