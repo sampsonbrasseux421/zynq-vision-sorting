@@ -1,5 +1,5 @@
 //=============================================================================
-// zdt_top2.v —— ZDT 引擎顶层包装（固定 50 MHz 时钟域）
+// zdt_top8.v —— ZDT 引擎顶层包装（时钟频率由 CLK_HZ 参数决定）
 //
 // 为什么需要这一层：
 //   Vivado 的 Block Design 会为 module reference 缓存 IP 定义
@@ -7,13 +7,18 @@
 //   直接改底层 RTL 的参数后，BD 仍按旧缓存综合，导致波特率错误。
 //   换一个新模块名可以强制重新生成。
 //
-// 本板 FCLK_CLK0 = 50 MHz（见 rst_ps7_0_50M 的命名）。
+// 机械臂工程中 FCLK_CLK0 = 50 MHz；OV5640 工程中 FCLK_CLK0 = 100 MHz，
+// 因此把 CLK_HZ 提为参数，例化时传入实际频率即可（波特率自动跟随）。
 //=============================================================================
 `default_nettype none
 
-module zdt_top8 (
+module zdt_top8 #(
+    /* 时钟频率与波特率可配置：机械臂工程用 50 MHz，OV5640 工程用 100 MHz */
+    parameter CLK_HZ = 50_000_000,
+    parameter BAUD   = 115200
+) (
     (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 aclk CLK" *)
-    (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aclk,ASSOCIATED_BUSIF S_AXI,ASSOCIATED_RESET aresetn,FREQ_HZ 50000000" *)
+    (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aclk,ASSOCIATED_BUSIF S_AXI,ASSOCIATED_RESET aresetn" *)
     input  wire        aclk,
     (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 aresetn RST" *)
     (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aresetn,POLARITY ACTIVE_LOW" *)
@@ -64,8 +69,8 @@ module zdt_top8 (
 );
 
     zdt_axil #(
-        .CLK_HZ (50_000_000),      /* 本板 FCLK_CLK0 = 50 MHz */
-        .BAUD   (115200)
+        .CLK_HZ (CLK_HZ),
+        .BAUD   (BAUD)
     ) u_zdt (
         .aclk          (aclk),
         .aresetn       (aresetn),

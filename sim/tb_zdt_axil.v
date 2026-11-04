@@ -14,7 +14,7 @@ module tb_zdt_axil;
 
     reg aclk = 0, aresetn = 0;
 
-    reg  [5:0]  awaddr = 0;
+    reg  [7:0]  awaddr = 0;
     reg         awvalid = 0;
     wire        awready;
     reg  [31:0] wdata = 0;
@@ -24,7 +24,7 @@ module tb_zdt_axil;
     wire [1:0]  bresp;
     wire        bvalid;
     reg         bready = 1;
-    reg  [5:0]  araddr = 0;
+    reg  [7:0]  araddr = 0;
     reg         arvalid = 0;
     wire        arready;
     wire [31:0] rdata;

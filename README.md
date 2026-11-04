@@ -189,3 +189,25 @@ Locally: cd sim && sh run_all.sh.
 ## 8. License
 
 MIT — see [LICENSE](LICENSE).
+
+## PL 逆运动学（ik_solver.v）
+
+四轴逆解、角度—脉冲换算与笛卡尔插补均在 PL 内完成，PS 只写坐标并等待完成位。
+
+- `src/rtl/ik_solver.v` —— CORDIC（16 级）+ 整数开方，13 状态串行；实测 2.4 μs、抖动 0，16 点最大偏差 0.043°
+- `src/rtl/zdt_interp.v` —— 笛卡尔直线插补 + 五次 S 曲线（s = 10u³−15u⁴+6u⁵），共线误差 0
+- `src/rtl/zdt_axil.v` —— AXI 寄存器 + 角度→脉冲（`pulse = deg × PPR × 46603 >> 32`）+ IK 自动触发
+- 机构参数见 `/etc/ik.conf`：LINK1=200、LINK2=175、J2Z=−23040、J3Z=23040、J4Z=1280、ELBOW=−1
+
+### 注意：Vivado module_ref 会缓存 RTL 快照
+
+修改底层 RTL 后，`reset_target` / `generate_target` 都不会重读源文件，
+必须换模块名重新 `create_bd_cell`。仓库中保留 `zdt_top8.v`（工程基线）与
+`zdt_top21.v`（当前版本），中间迭代版本见 `vivado/scripts/rebuild_zdt*.tcl`。
+
+### 验证
+
+```bash
+iverilog -g2005 -o ik.vvp src/rtl/ik_solver.v sim/tb_ik_solver.v && vvp ik.vvp
+iverilog -g2005 -o itp.vvp src/rtl/zdt_interp.v sim/tb_zdt_interp.v && vvp itp.vvp
+```

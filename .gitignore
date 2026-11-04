@@ -1,27 +1,28 @@
-# Vivado
-*.jou
+﻿# 仿真产物
+*.vvp
+*.vcd
+*.wlf
 *.log
-!sim/results/*.log
+
+# 编辑器/备份
+*.bak
+*.bak-*
+*.before-*
+*bak-*
+
+# Vivado 产物
+*.jou
 *.str
-.Xil/
-.vivado/
-*.wdb
-*.pb
 *.dcp
-!*.bit
+*.bit
+*.ltx
+/.Xil/
+*.cache/
+*.runs/
+*.gen/
+*.hw/
+*.sim/
 
 # Python
 __pycache__/
-*.py[cod]
-.venv/
-venv/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Local data
-data/*.mp4
-data/*.avi
-data/*.pt
-
+*.pyc
